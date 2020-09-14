@@ -2,14 +2,15 @@ using System;
 
 namespace TesteFactory.Model
 {
-    public class Customer
+    public class Customer : ICustomer
     {
-        private Customer(string name, DateTime birthDate, string email, string cpf)
+        public static readonly DateTime MinBithDate = new DateTime(1960, 1, 1);
+        public Customer(string name, DateTime birthDate, string cpf, string email = "")
         {
             Name = name;
             BirthDate = birthDate;
-            Email = email;
             CPF = cpf;
+            Email = email;
         }
 
         public string Name { get; private set; }
@@ -18,10 +19,6 @@ namespace TesteFactory.Model
         public string CPF { get; private set; }
         public int Age => DateTime.Today.Year - BirthDate.Year;
 
-        public static Customer Factory(string name, DateTime birthDate, string cpf, string emai = "")
-        {
-            return new Customer(name, birthDate, emai, cpf);
-        }
 
         public override string ToString()
         {
